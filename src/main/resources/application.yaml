@@ -4,8 +4,13 @@ spring:
 
   kafka:
     bootstrap-servers: localhost:9092
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
     consumer:
-      group-id: signa-customer-group
+      group-id: signa-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
@@ -18,4 +23,5 @@ server:
   port: ${PORT:9090}
 
 topic:
-  block: customer-block-topic
+  block-bank: bank-block-topic
+  block-signa: signa-block-topic
