@@ -14,7 +14,7 @@ import teknofest.signa.producer.enums.CustomerStatus;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerInfo {
-    boolean isExists;
+    Boolean isExists;
     String bank;
     CustomerStatus customerStatus;
 }
