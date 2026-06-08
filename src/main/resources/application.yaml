@@ -25,3 +25,11 @@ server:
 topic:
   block-bank: bank-block-topic
   block-signa: signa-block-topic
+
+feign:
+  client:
+    config:
+      bank-a:
+        url: ${BANK_A:http://localhost:8081}
+      bank-b:
+        url: ${BANK_B:http://localhost:8082}
