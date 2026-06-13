@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import teknofest.signa.producer.dto.AuthResponse;
-import teknofest.signa.producer.dto.LoginRequest;
-import teknofest.signa.producer.dto.RegisterRequest;
+import teknofest.signa.producer.model.dto.AuthResponse;
+import teknofest.signa.producer.model.dto.LoginRequest;
+import teknofest.signa.producer.model.dto.RegisterRequest;
 import teknofest.signa.producer.service.AuthService;
 
 @RestController

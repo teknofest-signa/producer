@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-import teknofest.signa.producer.event.BlockEvent;
-import teknofest.signa.producer.event.BlockNotificationEvent;
+import teknofest.signa.producer.model.event.BlockEvent;
+import teknofest.signa.producer.model.event.BlockNotificationEvent;
 import teknofest.signa.producer.kafka.producer.BlockProducer;
 
 @Slf4j

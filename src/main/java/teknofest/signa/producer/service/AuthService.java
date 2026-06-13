@@ -8,10 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
-import teknofest.signa.producer.dto.AuthResponse;
-import teknofest.signa.producer.dto.LoginRequest;
-import teknofest.signa.producer.dto.RegisterRequest;
-import teknofest.signa.producer.entity.Admin;
+import teknofest.signa.producer.model.dto.AuthResponse;
+import teknofest.signa.producer.model.dto.LoginRequest;
+import teknofest.signa.producer.model.dto.RegisterRequest;
+import teknofest.signa.producer.model.entity.Admin;
+import teknofest.signa.producer.enums.Status;
 import teknofest.signa.producer.handler.exception.ResourceNotFoundException;
 import teknofest.signa.producer.repository.AdminRepository;
 import teknofest.signa.producer.security.JwtService;
@@ -29,7 +30,7 @@ public class AuthService {
         String email = loginRequest.getEmail();
         log.info("login started for user: {}", email);
 
-        Admin admin = adminRepository.findByEmail(email)
+        Admin admin = adminRepository.findByEmailAndStatus(email, Status.ACTIVE.name())
                 .orElseThrow(() -> new ResourceNotFoundException(ADMIN_NOT_FOUND));
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, loginRequest.getPassword()));

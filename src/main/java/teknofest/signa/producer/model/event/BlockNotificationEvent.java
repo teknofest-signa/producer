@@ -1,4 +1,4 @@
-package teknofest.signa.producer.event;
+package teknofest.signa.producer.model.event;
 
 public record BlockNotificationEvent(String hash) {
 }

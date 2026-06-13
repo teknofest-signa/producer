@@ -1,4 +1,4 @@
-package teknofest.signa.producer.entity;
+package teknofest.signa.producer.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +22,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import teknofest.signa.producer.enums.Role;
+import teknofest.signa.producer.enums.Status;
 
 @Entity
 @Getter
@@ -47,6 +48,14 @@ public class Admin {
 
     @Column(name = "password", nullable = false)
     String password;
+
+    @Column(name = "token")
+    String token;
+
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    Status status = Status.ACTIVE;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)

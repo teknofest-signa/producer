@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import teknofest.signa.producer.client.BankAClient;
 import teknofest.signa.producer.client.BankBClient;
-import teknofest.signa.producer.dto.CustomerInfo;
+import teknofest.signa.producer.model.dto.CustomerInfo;
 
 @Slf4j
 @Service
