@@ -1,6 +1,10 @@
 package teknofest.signa.producer.handler;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +18,9 @@ import org.springframework.web.util.HtmlUtils;
 import teknofest.signa.producer.dto.ErrorResponse;
 import teknofest.signa.producer.handler.exception.ApplicationException;
 import teknofest.signa.producer.handler.exception.ExternalServiceException;
+import teknofest.signa.producer.handler.exception.InvalidCredentialsException;
 import teknofest.signa.producer.handler.exception.ResourceNotFoundException;
 import tools.jackson.databind.exc.InvalidFormatException;
-
-import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestControllerAdvice
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(ex, HttpStatus.SERVICE_UNAVAILABLE, request);
     }
 
-    @ExceptionHandler(InvalidCrdentialsException.class)
+    @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<ErrorResponse> handleUnauthorized(Exception ex, HttpServletRequest request) {
         log.debug("Authentication failed: {}", ex.getMessage());
         return buildErrorResponse(ex, HttpStatus.UNAUTHORIZED, request);
