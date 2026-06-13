@@ -11,5 +11,5 @@ import teknofest.signa.producer.model.entity.Admin;
 public interface AdminRepository extends JpaRepository<Admin, UUID> {
     Optional<Admin> findByEmail(String email);
     Optional<Admin> findByEmailAndStatus(String email, Status status);
-    Optional<Admin> findByToken(String token);
+    Optional<Admin> findByTokenAndStatus(String token, Status status);
 }
