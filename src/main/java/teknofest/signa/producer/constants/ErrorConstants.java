@@ -1,0 +1,11 @@
+package teknofest.signa.producer.constants;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class ErrorConstants {
+
+    public static final String ADMIN_NOT_FOUND = "Admin not found!";
+}
+
