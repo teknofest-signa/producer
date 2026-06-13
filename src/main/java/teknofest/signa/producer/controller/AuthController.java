@@ -2,11 +2,13 @@ package teknofest.signa.producer.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import teknofest.signa.producer.dto.AuthResponse;
+import teknofest.signa.producer.dto.LoginRequest;
+import teknofest.signa.producer.service.AuthService;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<SuccessResponse<AuthResponseDto>> login(@Valid @RequestBody LoginRequestDto loginRequestDto) {
-        return ResponseEntity.ok(authService.login(loginRequestDto));
+    public AuthResponse login(@Valid @RequestBody LoginRequest loginRequestDto) {
+        return authService.login(loginRequestDto);
     }
 }
