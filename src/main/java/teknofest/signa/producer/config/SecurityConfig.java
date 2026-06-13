@@ -67,6 +67,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/verify/**").permitAll()
                         .requestMatchers("/api/v1/super-admins/**").hasAuthority("SUPER_ADMIN")
+                        .requestMatchers("/api/v1/backoffice/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtAuthFilter(jwtService, userDetailsService), UsernamePasswordAuthenticationFilter.class);

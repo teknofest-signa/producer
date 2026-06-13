@@ -42,7 +42,7 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest registerRequest, String token) {
-        Admin admin = adminRepository.findByToken(token)
+        Admin admin = adminRepository.findByTokenAndStatus(token, Status.PENDING)
                 .orElseThrow(() -> new ResourceNotFoundException(TOKEN_NOT_FOUND));
 
         admin.setToken(null);
