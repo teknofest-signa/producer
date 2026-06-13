@@ -1,16 +1,18 @@
 package teknofest.signa.producer.service;
 
+import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import teknofest.signa.producer.enums.NotificationType;
 import teknofest.signa.producer.model.dto.CreateAdminRequest;
 import teknofest.signa.producer.model.entity.Admin;
 import teknofest.signa.producer.enums.Role;
 import teknofest.signa.producer.enums.Status;
-import teknofest.signa.producer.model.event.CreateAdminEvent;
+import teknofest.signa.producer.model.event.NotificationEvent;
 import teknofest.signa.producer.repository.AdminRepository;
 
 @Slf4j
@@ -36,9 +38,12 @@ public class SuperAdminService {
                 .build();
         adminRepository.save(admin);
 
-        applicationEventPublisher.publishEvent(new CreateAdminEvent(
-               admin.getEmail(),
-               admin.getToken()
+        applicationEventPublisher.publishEvent(new NotificationEvent(
+                admin.getEmail(),
+                NotificationType.CREATE_ADMIN,
+                Map.of(
+                        "token", admin.getToken()
+                )
         ));
     }
 }
