@@ -30,7 +30,7 @@ public class AuthService {
         String email = loginRequest.getEmail();
         log.info("login started for user: {}", email);
 
-        Admin admin = adminRepository.findByEmailAndStatus(email, Status.ACTIVE.name())
+        Admin admin = adminRepository.findByEmailAndStatus(email, Status.ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException(ADMIN_NOT_FOUND));
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, loginRequest.getPassword()));
