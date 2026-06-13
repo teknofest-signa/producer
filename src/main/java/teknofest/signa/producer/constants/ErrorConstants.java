@@ -7,5 +7,6 @@ import lombok.NoArgsConstructor;
 public class ErrorConstants {
 
     public static final String ADMIN_NOT_FOUND = "Admin not found!";
+    public static final String TOKEN_NOT_FOUND = "Token not found!";
 }
 

@@ -2,11 +2,13 @@ package teknofest.signa.producer.service;
 
 import static org.springframework.security.core.userdetails.User.withUsername;
 import static teknofest.signa.producer.constants.ErrorConstants.ADMIN_NOT_FOUND;
+import static teknofest.signa.producer.constants.ErrorConstants.TOKEN_NOT_FOUND;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import teknofest.signa.producer.model.dto.AuthResponse;
 import teknofest.signa.producer.model.dto.LoginRequest;
@@ -25,6 +27,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final AdminRepository adminRepository;
     private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthResponse login(LoginRequest loginRequest) {
         String email = loginRequest.getEmail();
@@ -39,7 +42,17 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest registerRequest, String token) {
-        return null;
+        Admin admin = adminRepository.findByToken(token)
+                .orElseThrow(() -> new ResourceNotFoundException(TOKEN_NOT_FOUND));
+
+        admin.setToken(null);
+        admin.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
+        admin.setUsername(registerRequest.getUsername());
+        admin.setStatus(Status.ACTIVE);
+
+        adminRepository.save(admin);
+
+        return generateAuthResponse(admin);
     }
 
 
