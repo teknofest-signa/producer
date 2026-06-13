@@ -5,9 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import teknofest.signa.producer.dto.AuthResponse;
 import teknofest.signa.producer.dto.LoginRequest;
+import teknofest.signa.producer.dto.RegisterRequest;
 import teknofest.signa.producer.service.AuthService;
 
 @RestController
@@ -20,5 +22,10 @@ public class AuthController {
     @PostMapping("/login")
     public AuthResponse login(@Valid @RequestBody LoginRequest loginRequestDto) {
         return authService.login(loginRequestDto);
+    }
+
+    @PostMapping("/admin-register")
+    public AuthResponse register(@Valid @RequestBody RegisterRequest registerRequest, @RequestParam String token) {
+        return authService.register(registerRequest, token);
     }
 }

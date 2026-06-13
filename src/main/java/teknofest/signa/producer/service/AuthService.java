@@ -10,6 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 import teknofest.signa.producer.dto.AuthResponse;
 import teknofest.signa.producer.dto.LoginRequest;
+import teknofest.signa.producer.dto.RegisterRequest;
 import teknofest.signa.producer.entity.Admin;
 import teknofest.signa.producer.handler.exception.ResourceNotFoundException;
 import teknofest.signa.producer.repository.AdminRepository;
@@ -36,18 +37,19 @@ public class AuthService {
         return generateAuthResponse(admin);
     }
 
+    public AuthResponse register(RegisterRequest registerRequest, String token) {
+        return null;
+    }
+
+
     private AuthResponse generateAuthResponse(Admin admin) {
         var UserDetails = withUsername(admin.getEmail())
                 .password(admin.getPassword())
                 .authorities(admin.getRole().name())
                 .build();
 
-        var accessToken = jwtService.generateToken(UserDetails);
-        var refreshToken = jwtService.generateRefreshToken(UserDetails);
-
         return AuthResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
+                .token(jwtService.generateToken(UserDetails))
                 .build();
     }
 }
