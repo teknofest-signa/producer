@@ -31,7 +31,7 @@ import teknofest.signa.producer.enums.Status;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(schema = "signa", name = "admins")
+@Table(name = "admins")
 @EntityListeners(AuditingEntityListener.class)
 public class Admin {
 

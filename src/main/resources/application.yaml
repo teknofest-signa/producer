@@ -16,8 +16,12 @@ spring:
         format_sql: true
         default_schema: signa
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     open-in-view: false
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/master.yaml
 
   mail:
     host: smtp.gmail.com
