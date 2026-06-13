@@ -19,6 +19,19 @@ spring:
       ddl-auto: update
     open-in-view: false
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${NO_REPLY_EMAIL}
+    password: ${NO_REPLY_EMAIL_PASSWORD}
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
   kafka:
     bootstrap-servers: localhost:9092
 
@@ -58,3 +71,15 @@ feign:
         url: ${BANK_A:http://localhost:8081}
       bank-b:
         url: ${BANK_B:http://localhost:8082}
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY:qYrUvRZbMm1gxAVfVG8KtJPqfLf3A2qkwo0U7cqDC+HqU0ZVOz+N4VkkFqaQoxlc}
+      access-token:
+        expiration: ${ACCESS_TOKEN_EXPIRATION:3600000}
+      refresh-token:
+        expiration: ${REFRESH_TOKEN_EXPIRATION:36000000}
+
+  frontend:
+    base-url: ${FRONTEND_BASE_URL:http://localhost:5173}
