@@ -1,6 +1,5 @@
 package teknofest.signa.producer.model.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -18,10 +17,6 @@ public class RegisterRequest {
 
     @NotBlank(message = "Username cannot be empty!")
     String username;
-
-    @Email(message = "Email is not valid!")
-    @NotBlank(message = "Email cannot be empty!")
-    String email;
 
     @NotBlank(message = "Password cannot be empty!")
     String password;
