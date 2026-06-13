@@ -77,9 +77,7 @@ application:
     jwt:
       secret-key: ${JWT_SECRET_KEY:qYrUvRZbMm1gxAVfVG8KtJPqfLf3A2qkwo0U7cqDC+HqU0ZVOz+N4VkkFqaQoxlc}
       access-token:
-        expiration: ${ACCESS_TOKEN_EXPIRATION:3600000}
-      refresh-token:
-        expiration: ${REFRESH_TOKEN_EXPIRATION:36000000}
+        expiration: ${ACCESS_TOKEN_EXPIRATION:36000000}
 
   frontend:
     base-url: ${FRONTEND_BASE_URL:http://localhost:5173}
