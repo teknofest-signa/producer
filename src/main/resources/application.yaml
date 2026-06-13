@@ -2,6 +2,23 @@ spring:
   application:
     name: producer
 
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/teknofest}
+    username: ${DB_USERNAME:teknofest}
+    password: ${DB_PASSWORD:teknofest}
+
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: signa
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
   kafka:
     bootstrap-servers: localhost:9092
 
@@ -21,6 +38,14 @@ spring:
 
 server:
   port: ${PORT:9090}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
 
 topic:
   block-bank: bank-block-topic
