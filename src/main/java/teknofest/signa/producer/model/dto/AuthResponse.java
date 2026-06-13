@@ -1,4 +1,4 @@
-package teknofest.signa.producer.dto;
+package teknofest.signa.producer.model.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
