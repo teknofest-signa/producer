@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import teknofest.signa.producer.model.dto.backoffice.InfoResponse;
@@ -24,7 +25,7 @@ public class BackofficeController {
     }
 
     @PostMapping(value = "/upload-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void uploadPhotoProfile(Principal principal, MultipartFile multipartFile) {
+    public void uploadPhotoProfile(Principal principal, @RequestParam(value = "file", required = false) MultipartFile multipartFile) {
         backofficeService.uploadProfilePhoto(principal.getName(), multipartFile);
     }
 }
