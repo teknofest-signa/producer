@@ -47,7 +47,7 @@ public class SecurityConfig {
         corsConfiguration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
                 "https://signa-txcj.onrender.com",
-                "https://bank-mobile-app.onrender.com"
+                "https://bank-backoffice.onrender.com"
         ));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         corsConfiguration.setAllowedHeaders(List.of("Authorization", "Content-Type", "x-auth-token"));

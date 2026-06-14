@@ -2,12 +2,11 @@ package teknofest.signa.producer.controller;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import teknofest.signa.producer.model.dto.bank.BankInfo;
 import teknofest.signa.producer.model.dto.bank.CreateBankRequest;
 import teknofest.signa.producer.service.BankService;
@@ -27,5 +26,10 @@ public class BankController {
     @GetMapping
     public List<BankInfo> getAllBanks() {
         return bankService.getAllBanks();
+    }
+
+    @PostMapping(value = "/{id}/upload-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadLogo(@PathVariable UUID id, @RequestParam(value = "file", required = false) MultipartFile multipartFile) {
+        bankService.uploadLogo(id, multipartFile);
     }
 }
