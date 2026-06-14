@@ -36,23 +36,6 @@ spring:
           starttls:
             enable: true
 
-  kafka:
-    bootstrap-servers: localhost:9092
-
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-
-    consumer:
-      group-id: signa-group
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-      properties:
-        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-        spring.json.trusted.packages: "*"
-        spring.json.value.default.type: teknofest.signa.producer.model.event.BlockEvent
-
 server:
   port: ${PORT:9090}
 
@@ -63,10 +46,6 @@ springdoc:
   api-docs:
     path: /v3/api-docs
     enabled: true
-
-topic:
-  block-bank: bank-block-topic
-  block-signa: signa-block-topic
 
 feign:
   client:
