@@ -11,8 +11,13 @@ import teknofest.signa.producer.enums.Status;
 import teknofest.signa.producer.handler.exception.ApplicationException;
 import teknofest.signa.producer.handler.exception.ResourceNotFoundException;
 import teknofest.signa.producer.model.dto.backoffice.InfoResponse;
+import teknofest.signa.producer.model.dto.transaction.TransactionInfo;
 import teknofest.signa.producer.model.entity.Admin;
+import teknofest.signa.producer.model.entity.Transaction;
 import teknofest.signa.producer.repository.AdminRepository;
+import teknofest.signa.producer.repository.TransactionRepository;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -20,6 +25,7 @@ import teknofest.signa.producer.repository.AdminRepository;
 public class BackofficeService {
 
     private final AdminRepository adminRepository;
+    private final TransactionRepository transactionRepository;
 
     public InfoResponse getInfo(String email) {
         Admin admin = adminRepository.findByEmailAndStatus(email, Status.ACTIVE)
@@ -53,5 +59,29 @@ public class BackofficeService {
         } catch (Exception exception) {
             throw new ApplicationException(FAILED_TO_UPLOAD_PHOTO);
         }
+    }
+
+    public List<TransactionInfo> getAllTransactions() {
+        return transactionRepository.findAll()
+                .stream()
+                .map(this::toTransactionInfo)
+                .toList();
+    }
+
+    private TransactionInfo toTransactionInfo(Transaction transaction) {
+        return TransactionInfo.builder()
+                .id(transaction.getId())
+                .fraudScore(transaction.getFraudScore())
+                .transactionStatus(transaction.getTransactionStatus())
+                .transactionType(transaction.getTransactionType())
+                .amount(transaction.getAmount())
+                .currency(transaction.getCurrency())
+                .receiverId(transaction.getReceiverId())
+                .senderId(transaction.getSenderId())
+                .referenceId(transaction.getReferenceId())
+                .description(transaction.getDescription())
+                .createdAt(transaction.getCreatedAt())
+                .updatedAt(transaction.getUpdatedAt())
+                .build();
     }
 }

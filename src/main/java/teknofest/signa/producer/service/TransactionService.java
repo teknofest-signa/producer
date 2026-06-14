@@ -15,7 +15,7 @@ import teknofest.signa.producer.enums.TransactionType;
 import teknofest.signa.producer.handler.exception.ApplicationException;
 import teknofest.signa.producer.handler.exception.ResourceNotFoundException;
 import teknofest.signa.producer.model.dto.transaction.CreateTransactionRequest;
-import teknofest.signa.producer.model.dto.transaction.TransactionResponse;
+import teknofest.signa.producer.model.dto.transaction.TransactionInfo;
 import teknofest.signa.producer.model.entity.Account;
 import teknofest.signa.producer.model.entity.Card;
 import teknofest.signa.producer.model.entity.Transaction;
@@ -32,7 +32,7 @@ public class TransactionService {
     private final AccountRepository accountRepository;
     private final TransactionRepository transactionRepository;
 
-    public TransactionResponse createTransaction(CreateTransactionRequest createTransactionRequest) {
+    public TransactionInfo createTransaction(CreateTransactionRequest createTransactionRequest) {
         if (TransactionMethod.CARD_TO_CARD.equals(createTransactionRequest.getTransactionMethod())) {
             Card toCard = cardRepository.findById(createTransactionRequest.getToCardId())
                     .orElseThrow(() -> new ResourceNotFoundException(CARD_NOT_FOUND));
@@ -66,7 +66,7 @@ public class TransactionService {
 
             transactionRepository.save(transaction);
         }
-        return TransactionResponse.builder()
+        return TransactionInfo.builder()
                 .score(ThreadLocalRandom.current().nextInt(101))
                 .build();
     }

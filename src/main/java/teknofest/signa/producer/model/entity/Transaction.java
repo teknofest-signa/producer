@@ -67,6 +67,9 @@ public class Transaction {
     @Column(name = "description")
     String description;
 
+    @Column(name = "fraud_score", nullable = false, precision = 19, scale = 4)
+    BigDecimal fraudScore;
+
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     Instant createdAt;
