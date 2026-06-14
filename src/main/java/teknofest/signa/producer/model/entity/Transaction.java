@@ -41,11 +41,11 @@ public class Transaction {
     @GeneratedValue
     UUID id;
 
-    @Column(name = "sender_id", nullable = false)
-    UUID senderId;
+    @Column(name = "from_account_id", nullable = false)
+    UUID fromAccountId;
 
-    @Column(name = "receiver_id", nullable = false)
-    UUID receiverId;
+    @Column(name = "to_account_id", nullable = false)
+    UUID toAccountId;
 
     @Column(name = "amount", nullable = false, precision = 19, scale = 4)
     BigDecimal amount;
