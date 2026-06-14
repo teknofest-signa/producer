@@ -33,7 +33,7 @@ public class EmailService {
             variables.put("frontendBaseUrl", frontendBaseUrl);
 
             if (variables.containsKey("token")) {
-                variables.put("resetUrl", frontendBaseUrl + "/reset-password?token=" + variables.get("token"));
+                variables.put("resetUrl", frontendBaseUrl + "/admin-register?token=" + variables.get("token"));
             }
 
             Context context = new Context();
