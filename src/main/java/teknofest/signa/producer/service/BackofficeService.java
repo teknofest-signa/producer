@@ -5,6 +5,10 @@ import static teknofest.signa.producer.constants.ErrorConstants.FAILED_TO_UPLOAD
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import teknofest.signa.producer.enums.Status;
@@ -17,12 +21,12 @@ import teknofest.signa.producer.model.entity.Transaction;
 import teknofest.signa.producer.repository.AdminRepository;
 import teknofest.signa.producer.repository.TransactionRepository;
 
-import java.util.List;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class BackofficeService {
+
+    private final static String SORT_FIELD = "createdAt";
 
     private final AdminRepository adminRepository;
     private final TransactionRepository transactionRepository;
@@ -61,11 +65,9 @@ public class BackofficeService {
         }
     }
 
-    public List<TransactionInfo> getAllTransactions() {
-        return transactionRepository.findAll()
-                .stream()
-                .map(this::toTransactionInfo)
-                .toList();
+    public Page<TransactionInfo> getAllTransactions(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(SORT_FIELD).descending());
+        return transactionRepository.findAll(pageable).map(this::toTransactionInfo);
     }
 
     private TransactionInfo toTransactionInfo(Transaction transaction) {
