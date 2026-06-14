@@ -15,7 +15,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -38,6 +40,10 @@ public class Bank {
 
     @Column(name = "name", nullable = false)
     String name;
+
+    @JdbcTypeCode(SqlTypes.VARBINARY)
+    @Column(name = "logo")
+    byte[] logo;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
