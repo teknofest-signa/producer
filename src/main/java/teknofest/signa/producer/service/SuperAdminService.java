@@ -1,7 +1,9 @@
 package teknofest.signa.producer.service;
 
+import static teknofest.signa.producer.constants.ErrorConstants.ADMIN_NOT_FOUND;
 import static teknofest.signa.producer.constants.ErrorConstants.EMAIL_ALREADY_EXISTS;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +13,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import teknofest.signa.producer.enums.NotificationType;
 import teknofest.signa.producer.handler.exception.ApplicationException;
+import teknofest.signa.producer.handler.exception.ResourceNotFoundException;
 import teknofest.signa.producer.model.dto.CreateAdminRequest;
+import teknofest.signa.producer.model.dto.backoffice.AdminInfo;
+import teknofest.signa.producer.model.dto.backoffice.AdminUpdateRequest;
 import teknofest.signa.producer.model.entity.Admin;
 import teknofest.signa.producer.enums.Role;
 import teknofest.signa.producer.enums.Status;
@@ -52,5 +57,61 @@ public class SuperAdminService {
                         "token", admin.getToken()
                 )
         ));
+    }
+
+    public List<AdminInfo> getAllAdmins() {
+        return adminRepository.findAll()
+                .stream()
+                .map(this::toAdminInfo)
+                .toList();
+    }
+
+    public AdminInfo getAdmin(UUID id) {
+        Admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(ADMIN_NOT_FOUND));
+
+        return toAdminInfo(admin);
+    }
+
+    public void updateAdmin(AdminUpdateRequest adminUpdateRequest, UUID id) {
+        Admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(ADMIN_NOT_FOUND));
+
+        if (adminUpdateRequest.getEmail() != null) {
+            admin.setEmail(adminUpdateRequest.getEmail());
+        }
+
+        if (adminUpdateRequest.getUsername() != null) {
+            admin.setUsername(adminUpdateRequest.getUsername());
+        }
+
+        if (adminUpdateRequest.getPassword() != null && !adminUpdateRequest.getPassword().isBlank()) {
+            admin.setPassword(passwordEncoder.encode(adminUpdateRequest.getPassword()));
+        }
+
+        if (adminUpdateRequest.getStatus() != null) {
+            admin.setStatus(adminUpdateRequest.getStatus());
+        }
+
+        adminRepository.save(admin);
+    }
+
+    public void deleteAdmin(UUID id) {
+        if (adminRepository.existsById(id)) {
+            throw new ResourceNotFoundException(ADMIN_NOT_FOUND);
+        }
+        adminRepository.deleteById(id);
+    }
+
+    private AdminInfo toAdminInfo(Admin admin) {
+        return AdminInfo.builder()
+                .id(admin.getId())
+                .email(admin.getEmail())
+                .username(admin.getUsername())
+                .status(admin.getStatus())
+                .role(admin.getRole())
+                .createdAt(admin.getCreatedAt())
+                .updatedAt(admin.getUpdatedAt())
+                .build();
     }
 }
