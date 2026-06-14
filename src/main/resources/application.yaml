@@ -14,7 +14,6 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        default_schema: signa
     hibernate:
       ddl-auto: none
     open-in-view: false
