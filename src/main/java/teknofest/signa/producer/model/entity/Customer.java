@@ -45,6 +45,9 @@ public class Customer {
     @Column(name = "name", nullable = false)
     String name;
 
+    @Column(name = "hash", nullable = false)
+    String hash;
+
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "customer_status", nullable = false)
