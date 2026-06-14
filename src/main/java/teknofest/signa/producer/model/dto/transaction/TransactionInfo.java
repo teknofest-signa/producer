@@ -21,8 +21,8 @@ public class TransactionInfo {
 
     UUID id;
 
-    UUID senderId;
-    UUID receiverId;
+    UUID fromAccountId;
+    UUID toAccountId;
 
     BigDecimal amount;
     BigDecimal fraudScore;
