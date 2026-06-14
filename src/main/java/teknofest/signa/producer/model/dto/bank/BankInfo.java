@@ -19,6 +19,8 @@ public class BankInfo {
 
     String name;
 
+    byte[] logo;
+
     Instant createdAt;
     Instant updatedAt;
 }
