@@ -26,6 +26,8 @@ public class AdminInfo {
 
     Role role;
 
+    byte[] profilePhoto;
+
     Instant createdAt;
     Instant updatedAt;
 }

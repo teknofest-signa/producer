@@ -1,12 +1,15 @@
 package teknofest.signa.producer.model.entity;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
@@ -61,6 +64,11 @@ public class Admin {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     Role role = Role.ADMIN;
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "profile_photo")
+    byte[] profilePhoto;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)

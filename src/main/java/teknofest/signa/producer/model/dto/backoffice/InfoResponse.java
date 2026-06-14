@@ -26,6 +26,8 @@ public class InfoResponse {
 
     Role role;
 
+    byte[] profilePhoto;
+
     Instant createdAt;
     Instant updatedAt;
 }
