@@ -37,6 +37,13 @@ public class BankService {
                 .toList();
     }
 
+    public void deleteBank(UUID bankId) {
+        if (!bankRepository.existsById(bankId)) {
+            throw new ResourceNotFoundException(BANK_NOT_FOUND);
+        }
+        bankRepository.deleteById(bankId);
+    }
+
     public void uploadLogo(UUID id, MultipartFile multipartFile) {
         Bank bank = bankRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(BANK_NOT_FOUND));

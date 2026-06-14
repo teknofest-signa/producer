@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,11 @@ public class BankController {
     @GetMapping
     public List<BankInfo> getAllBanks() {
         return bankService.getAllBanks();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteBank(@PathVariable UUID id) {
+        bankService.deleteBank(id);
     }
 
     @PostMapping(value = "/{id}/upload-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
