@@ -59,6 +59,7 @@ public class BankService {
         return BankInfo.builder()
                 .id(bank.getId())
                 .name(bank.getName())
+                .logo(bank.getLogo())
                 .createdAt(bank.getCreatedAt())
                 .updatedAt(bank.getUpdatedAt())
                 .build();
