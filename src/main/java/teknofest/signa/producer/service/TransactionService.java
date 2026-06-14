@@ -4,8 +4,8 @@ import static teknofest.signa.producer.constants.ErrorConstants.ACCOUNT_NOT_FOUN
 import static teknofest.signa.producer.constants.ErrorConstants.CARD_NOT_FOUND;
 import static teknofest.signa.producer.constants.ErrorConstants.INSUFFICIENT_BALANCE;
 
+import java.math.BigDecimal;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -67,7 +67,7 @@ public class TransactionService {
             transactionRepository.save(transaction);
         }
         return TransactionInfo.builder()
-                .score(ThreadLocalRandom.current().nextInt(101))
+                .fraudScore(BigDecimal.ONE)
                 .build();
     }
 }
