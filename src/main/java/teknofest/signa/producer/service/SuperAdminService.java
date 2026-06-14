@@ -1,5 +1,7 @@
 package teknofest.signa.producer.service;
 
+import static teknofest.signa.producer.constants.ErrorConstants.EMAIL_ALREADY_EXISTS;
+
 import java.util.Map;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +10,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import teknofest.signa.producer.enums.NotificationType;
+import teknofest.signa.producer.handler.exception.ApplicationException;
 import teknofest.signa.producer.model.dto.CreateAdminRequest;
 import teknofest.signa.producer.model.entity.Admin;
 import teknofest.signa.producer.enums.Role;
@@ -28,6 +31,10 @@ public class SuperAdminService {
     private final ApplicationEventPublisher applicationEventPublisher;
 
     public void createAdmin(CreateAdminRequest createAdminRequest) {
+        if (adminRepository.existsByEmail(createAdminRequest.getEmail())) {
+            throw new ApplicationException(EMAIL_ALREADY_EXISTS);
+        }
+
         Admin admin = Admin.builder()
                 .role(Role.ADMIN)
                 .email(createAdminRequest.getEmail())
