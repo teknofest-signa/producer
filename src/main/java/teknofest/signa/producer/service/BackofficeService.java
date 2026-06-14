@@ -41,6 +41,12 @@ public class BackofficeService {
         Admin admin = adminRepository.findByEmailAndStatus(email, Status.ACTIVE)
                 .orElseThrow(() -> new ResourceNotFoundException(ADMIN_NOT_FOUND));
 
+        if (multipartFile == null || multipartFile.isEmpty()) {
+            admin.setProfilePhoto(null);
+            adminRepository.save(admin);
+            return;
+        }
+
         try {
             admin.setProfilePhoto(multipartFile.getBytes());
             adminRepository.save(admin);
