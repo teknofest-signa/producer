@@ -1,8 +1,7 @@
 package teknofest.signa.producer.service;
 
 import static org.springframework.security.core.userdetails.User.withUsername;
-import static teknofest.signa.producer.constants.ErrorConstants.ADMIN_NOT_FOUND;
-import static teknofest.signa.producer.constants.ErrorConstants.TOKEN_NOT_FOUND;
+import static teknofest.signa.producer.constants.ErrorConstants.*;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import teknofest.signa.producer.handler.exception.ApplicationException;
 import teknofest.signa.producer.model.dto.AuthResponse;
 import teknofest.signa.producer.model.dto.LoginRequest;
 import teknofest.signa.producer.model.dto.RegisterRequest;
@@ -44,6 +44,10 @@ public class AuthService {
     public AuthResponse register(RegisterRequest registerRequest, String token) {
         Admin admin = adminRepository.findByTokenAndStatus(token, Status.PENDING)
                 .orElseThrow(() -> new ResourceNotFoundException(TOKEN_NOT_FOUND));
+
+        if (adminRepository.existsByUsername(registerRequest.getUsername())) {
+            throw new ApplicationException(USERNAME_ALREADY_EXISTS);
+        }
 
         admin.setToken(null);
         admin.setPassword(passwordEncoder.encode(registerRequest.getPassword()));

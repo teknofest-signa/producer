@@ -9,6 +9,10 @@ import teknofest.signa.producer.model.entity.Admin;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, UUID> {
+
+    boolean existsByEmail(String email);
+    boolean existsByUsername(String username);
+
     Optional<Admin> findByEmail(String email);
     Optional<Admin> findByEmailAndStatus(String email, Status status);
     Optional<Admin> findByTokenAndStatus(String token, Status status);
