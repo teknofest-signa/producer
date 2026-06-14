@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import teknofest.signa.producer.model.dto.bank.BankInfo;
 import teknofest.signa.producer.model.dto.bank.CreateBankRequest;
+import teknofest.signa.producer.model.dto.transaction.CreateTransactionRequest;
+import teknofest.signa.producer.model.dto.transaction.TransactionResponse;
 import teknofest.signa.producer.service.BankService;
+import teknofest.signa.producer.service.TransactionService;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +21,7 @@ import teknofest.signa.producer.service.BankService;
 public class BankController {
 
     private final BankService bankService;
+    private final TransactionService transactionService;
 
     @PostMapping
     public void createBank(@Valid @RequestBody CreateBankRequest createBankRequest) {
@@ -27,5 +31,10 @@ public class BankController {
     @GetMapping
     public List<BankInfo> getAllBanks() {
         return bankService.getAllBanks();
+    }
+
+    @PostMapping("/transactions")
+    public TransactionResponse createTransaction(CreateTransactionRequest createTransactionRequest) {
+        return transactionService.createTransaction(createTransactionRequest);
     }
 }
