@@ -1,8 +1,8 @@
 package teknofest.signa.producer.controller;
 
 import java.security.Principal;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +32,7 @@ public class BackofficeController {
     }
 
     @GetMapping("/transactions")
-    public List<TransactionInfo> getAllTransactions() {
-        return backofficeService.getAllTransactions();
+    public Page<TransactionInfo> getAllTransactions(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
+        return backofficeService.getAllTransactions(page, size);
     }
 }
