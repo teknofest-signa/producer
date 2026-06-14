@@ -55,8 +55,8 @@ public class TransactionService {
             accountRepository.save(toAccount);
 
             Transaction transaction = Transaction.builder()
-                    .senderId(fromAccount.getId())
-                    .receiverId(toAccount.getId())
+                    .fromAccountId(fromAccount.getId())
+                    .toAccountId(toAccount.getId())
                     .amount(createTransactionRequest.getAmount())
                     .currency(createTransactionRequest.getCurrency())
                     .transactionType(TransactionType.TRANSFER)
