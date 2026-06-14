@@ -1,5 +1,9 @@
 package teknofest.signa.producer.service;
 
+import static teknofest.signa.producer.constants.ErrorConstants.ACCOUNT_NOT_FOUND;
+import static teknofest.signa.producer.constants.ErrorConstants.CARD_NOT_FOUND;
+import static teknofest.signa.producer.constants.ErrorConstants.INSUFFICIENT_BALANCE;
+
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +22,6 @@ import teknofest.signa.producer.model.entity.Transaction;
 import teknofest.signa.producer.repository.AccountRepository;
 import teknofest.signa.producer.repository.CardRepository;
 import teknofest.signa.producer.repository.TransactionRepository;
-
-import static teknofest.signa.producer.constants.ErrorConstants.*;
 
 @Slf4j
 @Service

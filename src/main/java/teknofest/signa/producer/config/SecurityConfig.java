@@ -46,7 +46,8 @@ public class SecurityConfig {
 
         corsConfiguration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://signa-txcj.onrender.com"
+                "https://signa-txcj.onrender.com",
+                "https://bank-mobile-app.onrender.com"
         ));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         corsConfiguration.setAllowedHeaders(List.of("Authorization", "Content-Type", "x-auth-token"));
@@ -70,6 +71,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/super-admins/**").hasAuthority("SUPER_ADMIN")
                         .requestMatchers("/api/v1/backoffice/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
                         .requestMatchers("/api/v1/banks/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
+                        .requestMatchers("/api/v1/mobile-app/transactions").permitAll()
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtAuthFilter(jwtService, userDetailsService), UsernamePasswordAuthenticationFilter.class);
