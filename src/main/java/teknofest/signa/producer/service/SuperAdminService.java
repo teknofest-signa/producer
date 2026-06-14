@@ -62,6 +62,7 @@ public class SuperAdminService {
     public List<AdminInfo> getAllAdmins() {
         return adminRepository.findAll()
                 .stream()
+                .filter(admin -> admin.getRole().equals(Role.ADMIN))
                 .map(this::toAdminInfo)
                 .toList();
     }
@@ -97,7 +98,7 @@ public class SuperAdminService {
     }
 
     public void deleteAdmin(UUID id) {
-        if (adminRepository.existsById(id)) {
+        if (!adminRepository.existsById(id)) {
             throw new ResourceNotFoundException(ADMIN_NOT_FOUND);
         }
         adminRepository.deleteById(id);
@@ -110,6 +111,7 @@ public class SuperAdminService {
                 .username(admin.getUsername())
                 .status(admin.getStatus())
                 .role(admin.getRole())
+                .profilePhoto(admin.getProfilePhoto())
                 .createdAt(admin.getCreatedAt())
                 .updatedAt(admin.getUpdatedAt())
                 .build();

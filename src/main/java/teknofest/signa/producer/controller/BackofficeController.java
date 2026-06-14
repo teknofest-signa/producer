@@ -2,9 +2,12 @@ package teknofest.signa.producer.controller;
 
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import teknofest.signa.producer.model.dto.backoffice.InfoResponse;
 import teknofest.signa.producer.service.BackofficeService;
 
@@ -18,5 +21,10 @@ public class BackofficeController {
     @GetMapping
     public InfoResponse getInfo(Principal principal) {
         return backofficeService.getInfo(principal.getName());
+    }
+
+    @PostMapping(value = "/upload-photo", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void uploadPhotoProfile(Principal principal, MultipartFile multipartFile) {
+        backofficeService.uploadProfilePhoto(principal.getName(), multipartFile);
     }
 }
