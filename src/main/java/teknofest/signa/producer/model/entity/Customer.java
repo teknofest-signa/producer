@@ -17,14 +17,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UuidGenerator;
-import org.hibernate.type.SqlTypes;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import teknofest.signa.producer.enums.Role;
-import teknofest.signa.producer.enums.Status;
+import teknofest.signa.producer.enums.CustomerStatus;
 
 @Entity
 @Getter
@@ -32,41 +29,26 @@ import teknofest.signa.producer.enums.Status;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "admins")
+@Table(name = "customers")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @EntityListeners(AuditingEntityListener.class)
-public class Admin {
+public class Customer {
 
     @Id
     @UuidGenerator
     @GeneratedValue
     UUID id;
 
-    @Column(name = "username", nullable = false)
-    String username;
+    @Column(name = "bank_id", nullable = false)
+    String bankId;
 
-    @Column(name = "email", nullable = false)
-    String email;
-
-    @Column(name = "password", nullable = false)
-    String password;
-
-    @Column(name = "token")
-    String token;
+    @Column(name = "name", nullable = false)
+    String name;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    Status status = Status.ACTIVE;
-
-    @Builder.Default
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role", nullable = false)
-    Role role = Role.ADMIN;
-
-    @JdbcTypeCode(SqlTypes.VARBINARY)
-    @Column(name = "profile_photo")
-    byte[] profilePhoto;
+    @Column(name = "customer_status", nullable = false)
+    CustomerStatus customerStatus = CustomerStatus.ACTIVE;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
