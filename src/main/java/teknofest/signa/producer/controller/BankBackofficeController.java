@@ -10,7 +10,7 @@ import teknofest.signa.producer.service.TransactionService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/mobile-app")
+@RequestMapping("/api/v1/bank-backoffice")
 public class BankBackofficeController {
 
     private final TransactionService transactionService;

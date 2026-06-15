@@ -37,6 +37,10 @@ public class SecurityConfig {
             "/swagger-resources"
     };
 
+    private static final String[] BANK_BACKOFFICE_WHITELIST = {
+            "/api/v1/bank-backoffice/transactions"
+    };
+
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
@@ -66,12 +70,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
+                        .requestMatchers(BANK_BACKOFFICE_WHITELIST).permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/api/v1/verify/**").permitAll()
                         .requestMatchers("/api/v1/super-admins/**").hasAuthority("SUPER_ADMIN")
                         .requestMatchers("/api/v1/backoffice/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
                         .requestMatchers("/api/v1/banks/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
-                        .requestMatchers("/api/v1/mobile-app/transactions").permitAll()
+                        .requestMatchers("/api/v1/simulation/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtAuthFilter(jwtService, userDetailsService), UsernamePasswordAuthenticationFilter.class);
