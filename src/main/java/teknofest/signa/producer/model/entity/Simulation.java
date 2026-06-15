@@ -24,6 +24,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import teknofest.signa.producer.enums.SimulationType;
 import teknofest.signa.producer.enums.TransactionChannel;
+import teknofest.signa.producer.enums.TransactionFraudStatus;
 import teknofest.signa.producer.enums.TransactionType;
 
 @Entity
@@ -65,6 +66,10 @@ public class Simulation {
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_channel")
     TransactionChannel transactionChannel;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transaction_fraud_status")
+    TransactionFraudStatus transactionFraudStatus;
 
     @Column(name = "transaction_time")
     Instant transactionTime;
