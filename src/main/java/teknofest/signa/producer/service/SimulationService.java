@@ -43,6 +43,7 @@ public class SimulationService {
     private Simulation buildSimulation(SimulateTransactionRequest simulateTransactionRequest) {
         return Simulation.builder()
                 .simulationType(SimulationType.TRANSACTION)
+                .transactionType(simulateTransactionRequest.getTransactionType())
                 .fromAccountId(simulateTransactionRequest.getFromAccountId())
                 .toAccountId(simulateTransactionRequest.getToAccountId())
                 .amount(simulateTransactionRequest.getAmount())
