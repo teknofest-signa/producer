@@ -40,7 +40,7 @@ public class Customer {
     UUID id;
 
     @Column(name = "bank_id", nullable = false)
-    String bankId;
+    UUID bankId;
 
     @Column(name = "name", nullable = false)
     String name;

@@ -19,7 +19,7 @@ public class CustomerInfo {
 
     UUID id;
 
-    String bankId;
+    UUID bankId;
 
     String bankName;
 
