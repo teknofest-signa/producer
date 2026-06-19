@@ -52,7 +52,7 @@ public class CustomerService {
 
         Customer customer = Customer.builder()
                 .name(registerCustomerRequest.getName())
-                .bankId(bank.getId().toString())
+                .bankId(bank.getId())
                 .bankName(bank.getName())
                 .hash(passwordEncoder.encode(registerCustomerRequest.getFin()))
                 .customerStatus(CustomerStatus.ACTIVE)
