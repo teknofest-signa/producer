@@ -1,6 +1,7 @@
 package teknofest.signa.producer.model.dto.customer;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,6 @@ public class RegisterCustomerRequest {
     @NotBlank(message = "FIN cannot be empty!")
     String fin;
 
-    @NotBlank(message = "BankId cannot be empty!")
+    @NotNull(message = "BankId cannot be empty!")
     UUID bankId;
 }
