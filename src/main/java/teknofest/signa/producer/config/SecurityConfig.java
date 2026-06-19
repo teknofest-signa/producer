@@ -76,6 +76,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/backoffice/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
                         .requestMatchers("/api/v1/banks/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
                         .requestMatchers("/api/v1/simulation/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
+                        .requestMatchers("/api/v1/customers/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
                 )
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(new JwtAuthFilter(jwtService, userDetailsService), UsernamePasswordAuthenticationFilter.class);

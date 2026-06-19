@@ -45,6 +45,9 @@ public class Customer {
     @Column(name = "name", nullable = false)
     String name;
 
+    @Column(name = "bank_name", nullable = false)
+    String bankName;
+
     @Column(name = "hash", nullable = false)
     String hash;
 
