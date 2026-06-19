@@ -1,7 +1,10 @@
 package teknofest.signa.producer.service;
 
 import static teknofest.signa.producer.constants.ErrorConstants.BANK_NOT_FOUND;
+import static teknofest.signa.producer.constants.ErrorConstants.CUSTOMER_NOT_FOUND;
 
+import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -58,5 +61,19 @@ public class CustomerService {
                 .customerStatus(CustomerStatus.ACTIVE)
                 .build();
         customerRepository.save(customer);
+    }
+
+    public void blockCustomer(UUID id) {
+        Customer blockedCustomer = customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(CUSTOMER_NOT_FOUND));
+
+        List<Customer> customers = customerRepository.findByHash(blockedCustomer.getHash());
+        for (Customer customer : customers) {
+            customer.setCustomerStatus(CustomerStatus.SUSPENDED);
+        }
+        customerRepository.saveAll(customers);
+
+        blockedCustomer.setCustomerStatus(CustomerStatus.BLOCKED);
+        customerRepository.save(blockedCustomer);
     }
 }
