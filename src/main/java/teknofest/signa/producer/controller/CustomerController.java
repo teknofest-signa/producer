@@ -20,12 +20,12 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-    @GetMapping("/customers")
+    @GetMapping
     public Page<CustomerInfo> getAllCustomers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         return customerService.getAllCustomers(page, size);
     }
 
-    @PostMapping("/customers")
+    @PostMapping
     public void registerCustomer(@Valid @RequestBody RegisterCustomerRequest registerCustomerRequest) {
         customerService.registerCustomer(registerCustomerRequest);
     }
