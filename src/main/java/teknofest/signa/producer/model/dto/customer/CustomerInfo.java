@@ -1,5 +1,7 @@
-package teknofest.signa.producer.model.dto;
+package teknofest.signa.producer.model.dto.customer;
 
+import java.time.Instant;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +16,16 @@ import teknofest.signa.producer.enums.CustomerStatus;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerInfo {
-    Boolean isExists;
-    String bank;
+
+    UUID id;
+
+    String bankId;
+
+    String bankName;
+
+    String name;
+
     CustomerStatus customerStatus;
+
+    Instant createdAt;
 }
