@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import teknofest.signa.producer.enums.CustomerStatus;
 import teknofest.signa.producer.handler.exception.ResourceNotFoundException;
@@ -30,7 +29,6 @@ public class CustomerService {
     private final static String SORT_FIELD = "createdAt";
 
     private final BankRepository bankRepository;
-    private final PasswordEncoder passwordEncoder;
     private final CustomerRepository customerRepository;
 
     public Page<CustomerInfo> getAllCustomers(int page, int size) {
@@ -57,7 +55,7 @@ public class CustomerService {
                 .name(registerCustomerRequest.getName())
                 .bankId(bank.getId())
                 .bankName(bank.getName())
-                .hash(passwordEncoder.encode(registerCustomerRequest.getFin()))
+                .hash(registerCustomerRequest.getFin())
                 .customerStatus(CustomerStatus.ACTIVE)
                 .build();
         customerRepository.save(customer);
