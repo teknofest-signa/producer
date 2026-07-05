@@ -54,6 +54,12 @@ public class Admin {
     @Column(name = "token")
     String token;
 
+    @Column(name = "reset_password_token")
+    String resetPasswordToken;
+
+    @Column(name = "reset_password_token_created_at")
+    Instant resetPasswordTokenCreatedAt;
+
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)

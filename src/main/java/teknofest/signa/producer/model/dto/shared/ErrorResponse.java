@@ -1,4 +1,4 @@
-package teknofest.signa.producer.model.dto;
+package teknofest.signa.producer.model.dto.shared;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;

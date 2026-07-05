@@ -32,7 +32,7 @@ public class EmailService {
             Map<String, Object> variables = new HashMap<>(notificationEvent.params());
             variables.put("frontendBaseUrl", frontendBaseUrl);
 
-            if (variables.containsKey("token")) {
+            if (!variables.containsKey("resetUrl") && variables.containsKey("token")) {
                 variables.put("resetUrl", frontendBaseUrl + "/admin-register?token=" + variables.get("token"));
             }
 

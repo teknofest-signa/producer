@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import teknofest.signa.producer.model.dto.AuthResponse;
-import teknofest.signa.producer.model.dto.LoginRequest;
-import teknofest.signa.producer.model.dto.RegisterRequest;
+import teknofest.signa.producer.model.dto.auth.AuthResponse;
+import teknofest.signa.producer.model.dto.auth.ForgotPasswordRequest;
+import teknofest.signa.producer.model.dto.auth.LoginRequest;
+import teknofest.signa.producer.model.dto.auth.RegisterRequest;
+import teknofest.signa.producer.model.dto.auth.ResetPasswordRequest;
 import teknofest.signa.producer.service.AuthService;
 
 @RestController
@@ -27,5 +29,15 @@ public class AuthController {
     @PostMapping("/admin-register")
     public AuthResponse register(@Valid @RequestBody RegisterRequest registerRequest, @RequestParam String token) {
         return authService.register(registerRequest, token);
+    }
+
+    @PostMapping("/reset-password")
+    public void resetPassword(@Valid @RequestBody ResetPasswordRequest resetPasswordRequest) {
+        authService.resetPassword(resetPasswordRequest);
+    }
+
+    @PostMapping("/forgot-password")
+    public void forgotPassword(@Valid @RequestBody ForgotPasswordRequest forgotPasswordRequestDto) {
+        authService.forgotPassword(forgotPasswordRequestDto);
     }
 }

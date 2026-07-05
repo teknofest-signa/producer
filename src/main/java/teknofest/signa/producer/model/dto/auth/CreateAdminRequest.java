@@ -1,4 +1,4 @@
-package teknofest.signa.producer.model.dto;
+package teknofest.signa.producer.model.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

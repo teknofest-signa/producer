@@ -1,5 +1,6 @@
-package teknofest.signa.producer.model.dto;
+package teknofest.signa.producer.model.dto.auth;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +13,11 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class AuthResponse {
+public class RegisterRequest {
 
-    String token;
+    @NotBlank(message = "Username cannot be empty!")
+    String username;
+
+    @NotBlank(message = "Password cannot be empty!")
+    String password;
 }
