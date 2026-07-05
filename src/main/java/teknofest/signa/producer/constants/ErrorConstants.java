@@ -1,19 +1,18 @@
 package teknofest.signa.producer.constants;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+public final class ErrorConstants {
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class ErrorConstants {
+    private ErrorConstants() {
+    }
 
-    public static final String ADMIN_NOT_FOUND = "Admin not found!";
-    public static final String TOKEN_NOT_FOUND = "Token not found!";
-    public static final String BANK_NOT_FOUND = "Bank not found!";
-    public static final String CUSTOMER_NOT_FOUND = "Customer not found!";
+    public static final String BANK_NOT_FOUND = "BANK NOT FOUND!";
+    public static final String ADMIN_NOT_FOUND = "ADMIN NOT FOUND!";
+    public static final String TOKEN_NOT_FOUND = "TOKEN NOT FOUND!";
+    public static final String CUSTOMER_NOT_FOUND = "CUSTOMER NOT FOUND!";
 
-    public static final String EMAIL_ALREADY_EXISTS = "Email already exists!";
-    public static final String USERNAME_ALREADY_EXISTS = "Username already exists!";
+    public static final String EMAIL_ALREADY_EXISTS = "EMAIL ALREADY EXISTS!";
+    public static final String USERNAME_ALREADY_EXISTS = "USERNAME ALREADY EXISTS!";
 
-    public static final String FAILED_TO_UPLOAD_PHOTO = "Failed to upload photo!";
+    public static final String FAILED_TO_UPLOAD_PHOTO = "FAILED TO UPLOAD PHOTO!";
 }
 

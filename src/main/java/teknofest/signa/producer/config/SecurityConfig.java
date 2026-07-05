@@ -37,10 +37,6 @@ public class SecurityConfig {
             "/swagger-resources"
     };
 
-    private static final String[] BANK_BACKOFFICE_WHITELIST = {
-            "/api/v1/bank-backoffice/transactions"
-    };
-
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
@@ -50,8 +46,7 @@ public class SecurityConfig {
 
         corsConfiguration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://signa-txcj.onrender.com",
-                "https://bank-backoffice.onrender.com"
+                "https://signa-txcj.onrender.com"
         ));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         corsConfiguration.setAllowedHeaders(List.of("Authorization", "Content-Type", "x-auth-token"));
@@ -70,7 +65,6 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
-                        .requestMatchers(BANK_BACKOFFICE_WHITELIST).permitAll()
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/super-admins/**").hasAuthority("SUPER_ADMIN")
                         .requestMatchers("/api/v1/backoffice/**").hasAnyAuthority("SUPER_ADMIN", "ADMIN")
