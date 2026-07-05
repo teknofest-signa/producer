@@ -14,5 +14,8 @@ public final class ErrorConstants {
     public static final String USERNAME_ALREADY_EXISTS = "USERNAME ALREADY EXISTS!";
 
     public static final String FAILED_TO_UPLOAD_PHOTO = "FAILED TO UPLOAD PHOTO!";
+
+    public static final String PASSWORD_EXPIRED = "PASSWORD RESET TOKEN HAS EXPIRED!";
+    public static final String PASSWORD_COOLDOWN_EXCEPTION = "WAIT BEFORE REQUESTING A NEW PASSWORD RESET LINK!";
 }
 

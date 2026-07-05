@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import teknofest.signa.producer.enums.NotificationType;
 import teknofest.signa.producer.handler.exception.ApplicationException;
 import teknofest.signa.producer.handler.exception.ResourceNotFoundException;
-import teknofest.signa.producer.model.dto.CreateAdminRequest;
+import teknofest.signa.producer.model.dto.auth.CreateAdminRequest;
 import teknofest.signa.producer.model.dto.backoffice.AdminInfo;
 import teknofest.signa.producer.model.dto.backoffice.AdminUpdateRequest;
 import teknofest.signa.producer.model.entity.Admin;

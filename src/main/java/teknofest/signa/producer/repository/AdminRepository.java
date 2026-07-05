@@ -16,4 +16,6 @@ public interface AdminRepository extends JpaRepository<Admin, UUID> {
     Optional<Admin> findByEmail(String email);
     Optional<Admin> findByEmailAndStatus(String email, Status status);
     Optional<Admin> findByTokenAndStatus(String token, Status status);
+
+    Optional<Admin> findByResetPasswordToken(String resetPasswordToken);
 }

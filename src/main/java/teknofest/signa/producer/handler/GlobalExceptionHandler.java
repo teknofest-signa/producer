@@ -15,7 +15,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.util.HtmlUtils;
-import teknofest.signa.producer.model.dto.ErrorResponse;
+import teknofest.signa.producer.model.dto.shared.ErrorResponse;
 import teknofest.signa.producer.handler.exception.ApplicationException;
 import teknofest.signa.producer.handler.exception.ExternalServiceException;
 import teknofest.signa.producer.handler.exception.InvalidCredentialsException;

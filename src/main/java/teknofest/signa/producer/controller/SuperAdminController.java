@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import teknofest.signa.producer.model.dto.CreateAdminRequest;
+import teknofest.signa.producer.model.dto.auth.CreateAdminRequest;
 import teknofest.signa.producer.model.dto.backoffice.AdminInfo;
 import teknofest.signa.producer.model.dto.backoffice.AdminUpdateRequest;
 import teknofest.signa.producer.service.SuperAdminService;
